@@ -36,6 +36,7 @@ RUN apt update
 RUN apt install -y bridge-utils
 
 # https://docs.nvidia.com/jetson/l4t/index.html#page/Tegra%20Linux%20Driver%20Package%20Development%20Guide/updating_jetson_and_host.html
+# Recommended package by Nvidia
 RUN apt install -y -o Dpkg::Options::="--force-overwrite" \
     nvidia-l4t-core \
     nvidia-l4t-init \
