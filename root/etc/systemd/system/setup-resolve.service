@@ -1,12 +1,14 @@
 # https://forums.developer.nvidia.com/t/resolv-conf-being-overwritten/45629
+# https://github.com/pythops/jetson-nano-image/issues/92
 [Unit]
-Description=Symlink /etc/resolv.conf to systemd
+Description=Make /etc/resolv.conf immutable
 Requires=local-fs.target
 
 [Service]
 Type=oneshot
 TimeoutSec=infinity
-ExecStart=ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+ExecStart=/usr/bin/bash -c '/usr/bin/echo "nameserver 8.8.8.8" | tee /etc/resolv.conf
+ExecStart=/usr/bin/chattr +i /etc/resolv.conf
 
 [Install]
 RequiredBy=network.target
